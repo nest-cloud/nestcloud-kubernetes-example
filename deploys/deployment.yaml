@@ -1,0 +1,38 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  labels:
+    app: nestcloud-kubernetes-example
+  name: nestcloud-kubernetes-example
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nestcloud-kubernetes-example
+  template:
+    metadata:
+      labels:
+        app: nestcloud-kubernetes-example
+    spec:
+      containers:
+        - image: nestcloud-kubernetes-example:1.0.0
+          imagePullPolicy: IfNotPresent
+          name: proxy
+          resources: {}
+          env:
+            - name: NODE_ENV
+              value: production
+            - name: RUNTIME
+              value: kubernetes
+          volumeMounts:
+            - mountPath: /opt/app/configs
+              name: volume-config
+      volumes:
+        - configMap:
+            items:
+              - key: config.yaml
+                path: config.yaml
+            name: nestcloud-kubernetes-example-conf
+          name: volume-config
+      serviceAccountName: nestcloud-kubernetes-example-account

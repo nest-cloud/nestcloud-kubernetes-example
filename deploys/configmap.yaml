@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  config.yaml: |-
+    config:
+      key: nestcloud-kubernetes-config
+      namespace: default
+      path: config.yaml
+    service:
+      name: nestcloud-kubernetes-example
+      port: 3200
+    proxy:
+      routes:
+        - id: user
+          # self
+          uri: http://nestcloud-kubernetes-example
+        - id: article
+          uri: https://api.apiopen.top/recommendPoetry
+    kubernetes:
+      kubeConfig: /Users/zhaofeng/.kube/config
+    logger:
+      level: debug
+      transports:
+        - transport: console
+          colorize: true
+          datePattern: YYYY-MM-DD HH:mm:ss
+          label: ${{ service.name }}
+        - transport: dailyRotateFile
+          label: ${{ service.name }}
+          filename: ../logs/${{ service.name }}-%DATE%.log
+          datePattern: YYYY-MM-DD-HH
+          zippedArchive: true
+          maxSize: 20m
+          maxFiles: 14d
+
+kind: ConfigMap
+metadata:
+  name: nestcloud-kubernetes-example-conf
+  namespace: default

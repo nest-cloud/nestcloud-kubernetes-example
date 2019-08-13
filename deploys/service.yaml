@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nestcloud-kubernetes-example-service
+  namespace: yanrongyun
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 3200
+  selector:
+    app: nestcloud-kubernetes-example
+  type: ClusterIP
