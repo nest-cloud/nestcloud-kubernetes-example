@@ -16,7 +16,7 @@ spec:
         app: nestcloud-kubernetes-example
     spec:
       containers:
-        - image: nestcloud-kubernetes-example:1.0.0
+        - image: nestcloud/nestcloud-kubernetes-example:1.1.1
           imagePullPolicy: IfNotPresent
           name: proxy
           resources: {}
@@ -26,8 +26,9 @@ spec:
             - name: RUNTIME
               value: kubernetes
           volumeMounts:
-            - mountPath: /opt/app/configs
+            - mountPath: /opt/app/build/config.yaml
               name: volume-config
+              subPath: config.yaml
       volumes:
         - configMap:
             items:

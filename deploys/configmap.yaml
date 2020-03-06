@@ -2,7 +2,7 @@ apiVersion: v1
 data:
   config.yaml: |-
     config:
-      key: nestcloud-kubernetes-config
+      name: nestcloud-kubernetes-config
       namespace: default
       path: config.yaml
     service:

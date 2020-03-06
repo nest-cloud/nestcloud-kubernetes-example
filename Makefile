@@ -1,5 +1,5 @@
-IMAGE_NAME=nestcloud-kubernetes-example
-IMAGE_VERSION=1.0.0
+IMAGE_NAME=nestcloud/nestcloud-kubernetes-example
+IMAGE_VERSION=1.1.1
 
 
 build:

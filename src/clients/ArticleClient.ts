@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Get } from '@nestcloud/feign';
+import { Get } from '@nestcloud/http';
 
 @Injectable()
 export class ArticleClient {

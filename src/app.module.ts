@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { BootModule } from '@nestcloud/boot';
 import { ConfigModule } from '@nestcloud/config';
-import { FeignModule } from '@nestcloud/feign';
+import { HttpModule } from '@nestcloud/http';
 import { ScheduleModule } from '@nestcloud/schedule';
-import { NEST_BOOT, components, NEST_KUBERNETES } from '@nestcloud/common';
+import { BOOT, components, KUBERNETES, LOADBALANCE } from '@nestcloud/common';
 import { TypeOrmHealthIndicator, TerminusModule, TerminusModuleOptions } from '@nestjs/terminus';
 import { ProxyModule } from '@nestcloud/proxy';
 
@@ -27,13 +27,13 @@ const getTerminusOptions = (db: TypeOrmHealthIndicator): TerminusModuleOptions =
 
 @Module({
   imports: [
-    LoggerModule.register(),
-    ScheduleModule.register(),
-    BootModule.register(resolve(__dirname, '../configs'), 'config.yaml'),
-    ConfigModule.register({ dependencies: [NEST_KUBERNETES, NEST_BOOT] }),
-    FeignModule.register(),
-    ProxyModule.register({ dependencies: [NEST_BOOT] }),
-    KubernetesModule.register({ dependencies: [NEST_BOOT] }),
+    LoggerModule.forRoot(),
+    ScheduleModule.forRoot(),
+    BootModule.forRoot({ filePath: resolve(__dirname, 'config.yaml') }),
+    ConfigModule.forRootAsync({ inject: [KUBERNETES, BOOT] }),
+    HttpModule.forRoot(),
+    ProxyModule.forRootAsync({ inject: [BOOT] }),
+    KubernetesModule.forRootAsync({ inject: [BOOT] }),
     TerminusModule.forRootAsync({
       inject: [TypeOrmHealthIndicator],
       useFactory: db => getTerminusOptions(db as TypeOrmHealthIndicator),
