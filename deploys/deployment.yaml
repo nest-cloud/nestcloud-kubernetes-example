@@ -16,7 +16,7 @@ spec:
         app: nestcloud-kubernetes-example
     spec:
       containers:
-        - image: nestcloud/nestcloud-kubernetes-example:1.1.1
+        - image: nestcloud/nestcloud-kubernetes-example:1.1.2
           imagePullPolicy: IfNotPresent
           name: proxy
           resources: {}

@@ -20,7 +20,7 @@ How run nestcloud app in kubernetes cluster.
 ## Requirement Modules
 
 * @nestcloud/boot
-* @nestcloud/feign
+* @nestcloud/http
 
 
 ## Optional Modules
