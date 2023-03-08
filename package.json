@@ -30,7 +30,7 @@
     "@nestcloud/proxy": "^0.7.13",
     "@nestcloud/schedule": "^0.7.13",
     "@nestjs/common": "^6.5.3",
-    "@nestjs/core": "^6.5.3",
+    "@nestjs/core": "^9.0.5",
     "@nestjs/microservices": "^6.5.3",
     "@nestjs/platform-express": "^6.5.3",
     "@nestjs/swagger": "^3.0.1",
